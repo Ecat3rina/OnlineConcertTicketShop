@@ -1,0 +1,12 @@
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\bin\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.deps.json
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\bin\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.dll
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\bin\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.pdb
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.AssemblyInfoInputs.cache
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.AssemblyInfo.cs
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.dll
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.pdb
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.csproj.CoreCompileInputs.cache
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\bin\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.runtimeconfig.json
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\bin\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.runtimeconfig.dev.json
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.genruntimeconfig.cache
+C:\Users\Ecaterina\source\repos\ConcertTicketsShop\ConcertTicketsShop.Dal\obj\Debug\netcoreapp3.1\ConcertTicketsShop.Dal.csprojAssemblyReference.cache
