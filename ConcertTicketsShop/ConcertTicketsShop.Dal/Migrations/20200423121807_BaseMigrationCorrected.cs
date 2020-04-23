@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConcertTicketsShop.Dal.Migrations
 {
-    public partial class BaseMigration : Migration
+    public partial class BaseMigrationCorrected : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ConcertParticipants",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ConcertId = table.Column<int>(nullable: false),
+                    ArtistId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConcertParticipants", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
@@ -66,20 +80,21 @@ namespace ConcertTicketsShop.Dal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Wishlists",
+                name: "Artists",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false)
+                    ArtistName = table.Column<string>(nullable: true),
+                    GenreId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wishlists", x => x.Id);
+                    table.PrimaryKey("PK_Artists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wishlists_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Artists_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -93,8 +108,7 @@ namespace ConcertTicketsShop.Dal.Migrations
                     ConcertDate = table.Column<DateTime>(nullable: false),
                     ConcertStart = table.Column<DateTime>(nullable: false),
                     ConcertFinish = table.Column<DateTime>(nullable: false),
-                    VenueId = table.Column<int>(nullable: false),
-                    WishlistId = table.Column<int>(nullable: true)
+                    VenueId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,39 +117,6 @@ namespace ConcertTicketsShop.Dal.Migrations
                         name: "FK_Concerts_Venues_VenueId",
                         column: x => x.VenueId,
                         principalTable: "Venues",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Concerts_Wishlists_WishlistId",
-                        column: x => x.WishlistId,
-                        principalTable: "Wishlists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Artists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArtistName = table.Column<string>(nullable: true),
-                    GenreId = table.Column<int>(nullable: false),
-                    ConcertId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Artists", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Artists_Concerts_ConcertId",
-                        column: x => x.ConcertId,
-                        principalTable: "Concerts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Artists_Genres_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -174,27 +155,41 @@ namespace ConcertTicketsShop.Dal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Artists_ConcertId",
-                table: "Artists",
-                column: "ConcertId");
+            migrationBuilder.CreateTable(
+                name: "Wishlists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    ConcertId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Concerts_ConcertId",
+                        column: x => x.ConcertId,
+                        principalTable: "Concerts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Artists_GenreId",
                 table: "Artists",
-                column: "GenreId",
-                unique: true);
+                column: "GenreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Concerts_VenueId",
                 table: "Concerts",
-                column: "VenueId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Concerts_WishlistId",
-                table: "Concerts",
-                column: "WishlistId");
+                column: "VenueId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ConcertId",
@@ -204,8 +199,7 @@ namespace ConcertTicketsShop.Dal.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_TypeId",
                 table: "Tickets",
-                column: "TypeId",
-                unique: true);
+                column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_UserId",
@@ -213,10 +207,14 @@ namespace ConcertTicketsShop.Dal.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_ConcertId",
+                table: "Wishlists",
+                column: "ConcertId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Wishlists_UserId",
                 table: "Wishlists",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -225,25 +223,28 @@ namespace ConcertTicketsShop.Dal.Migrations
                 name: "Artists");
 
             migrationBuilder.DropTable(
+                name: "ConcertParticipants");
+
+            migrationBuilder.DropTable(
                 name: "Tickets");
-
-            migrationBuilder.DropTable(
-                name: "Genres");
-
-            migrationBuilder.DropTable(
-                name: "Concerts");
-
-            migrationBuilder.DropTable(
-                name: "TicketTypes");
-
-            migrationBuilder.DropTable(
-                name: "Venues");
 
             migrationBuilder.DropTable(
                 name: "Wishlists");
 
             migrationBuilder.DropTable(
+                name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "TicketTypes");
+
+            migrationBuilder.DropTable(
+                name: "Concerts");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Venues");
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-
-namespace ConcertTicketsShop.Dal.Entities
+﻿namespace ConcertTicketsShop.Dal.Entities
 {
     public class Ticket
     {
@@ -15,6 +10,5 @@ namespace ConcertTicketsShop.Dal.Entities
         public TicketType Type { get; set; }
         public int ConcertId { get; set; }
         public Concert Concert { get; set; }
-
     }
 }

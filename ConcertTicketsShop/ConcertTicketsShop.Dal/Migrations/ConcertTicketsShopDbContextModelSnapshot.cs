@@ -29,18 +29,12 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.Property<string>("ArtistName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ConcertId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConcertId");
-
-                    b.HasIndex("GenreId")
-                        .IsUnique();
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Artists");
                 });
@@ -64,17 +58,29 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.Property<int>("VenueId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WishlistId")
+                    b.HasKey("Id");
+
+                    b.HasIndex("VenueId");
+
+                    b.ToTable("Concerts");
+                });
+
+            modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.ConcertParticipant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConcertId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VenueId")
-                        .IsUnique();
-
-                    b.HasIndex("WishlistId");
-
-                    b.ToTable("Concerts");
+                    b.ToTable("ConcertParticipants");
                 });
 
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Genre", b =>
@@ -115,8 +121,7 @@ namespace ConcertTicketsShop.Dal.Migrations
 
                     b.HasIndex("ConcertId");
 
-                    b.HasIndex("TypeId")
-                        .IsUnique();
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("UserId");
 
@@ -193,28 +198,26 @@ namespace ConcertTicketsShop.Dal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConcertId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("ConcertId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Artist", b =>
                 {
-                    b.HasOne("ConcertTicketsShop.Dal.Entities.Concert", "Concert")
-                        .WithMany("Artists")
-                        .HasForeignKey("ConcertId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ConcertTicketsShop.Dal.Entities.Genre", "Genre")
-                        .WithOne("Artist")
-                        .HasForeignKey("ConcertTicketsShop.Dal.Entities.Artist", "GenreId")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -222,14 +225,10 @@ namespace ConcertTicketsShop.Dal.Migrations
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Concert", b =>
                 {
                     b.HasOne("ConcertTicketsShop.Dal.Entities.Venue", "Venue")
-                        .WithOne("Concert")
-                        .HasForeignKey("ConcertTicketsShop.Dal.Entities.Concert", "VenueId")
+                        .WithMany()
+                        .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ConcertTicketsShop.Dal.Entities.Wishlist", "Wishlist")
-                        .WithMany("Concerts")
-                        .HasForeignKey("WishlistId");
                 });
 
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Ticket", b =>
@@ -241,8 +240,8 @@ namespace ConcertTicketsShop.Dal.Migrations
                         .IsRequired();
 
                     b.HasOne("ConcertTicketsShop.Dal.Entities.TicketType", "Type")
-                        .WithOne("Ticket")
-                        .HasForeignKey("ConcertTicketsShop.Dal.Entities.Ticket", "TypeId")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -255,9 +254,15 @@ namespace ConcertTicketsShop.Dal.Migrations
 
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Wishlist", b =>
                 {
+                    b.HasOne("ConcertTicketsShop.Dal.Entities.Concert", "Concert")
+                        .WithMany()
+                        .HasForeignKey("ConcertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ConcertTicketsShop.Dal.Entities.User", "User")
-                        .WithOne("Wishlist")
-                        .HasForeignKey("ConcertTicketsShop.Dal.Entities.Wishlist", "UserId")
+                        .WithMany("Wishlists")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

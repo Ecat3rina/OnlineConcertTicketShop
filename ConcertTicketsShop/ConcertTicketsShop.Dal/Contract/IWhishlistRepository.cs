@@ -4,11 +4,8 @@ using System.Threading.Tasks;
 
 namespace ConcertTicketsShop.Dal.Contract
 {
-    public interface IWhishlistRepository
+    public interface IWhishlistRepository : IBaseRepository<Wishlist>
     {
         Task<IList<Wishlist>> GetUserWhishlistAsync(int userId);
-        Task AddConcertToWhishlistAsync(int userId, int concertId);
-       
-        //remove ..
     }
 }

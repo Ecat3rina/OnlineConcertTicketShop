@@ -10,8 +10,7 @@ namespace ConcertTicketsShop.Dal.Entities
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string DisplayName { get; set; }
-
         public List<Ticket> Tickets { get; set; }
-        public Wishlist Wishlist { get; set; }
+        public List<Wishlist> Wishlists { get; set; }
     }
 }
