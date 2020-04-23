@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConcertTicketsShop.Dal.Migrations
 {
     [DbContext(typeof(ConcertTicketsShopDbContext))]
-    [Migration("20200421170252_finalentities")]
-    partial class finalentities
+    [Migration("20200423072418_BaseMigration")]
+    partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

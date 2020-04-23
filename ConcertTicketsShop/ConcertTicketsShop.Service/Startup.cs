@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using ConcertTicketsShop.Dal;
+using ConcertTicketsShop.Domain.Configuration;
+using ConcertTicketsShop.Midleware;
+using ConcertTicketsShop.Service.Midleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ConcertTicketsShop.Service
 {
@@ -28,29 +26,59 @@ namespace ConcertTicketsShop.Service
         public void ConfigureServices(IServiceCollection services)
         {
             //database
+            var dbOptions = new DbConnectionStringsOptions();
+            Configuration.GetSection("ConnectionStrings").Bind(dbOptions);
+
+            var authOptions = new AuthOptions();
+            Configuration.GetSection("Authentication").Bind(authOptions);
 
             services.AddDbContext<ConcertTicketsShopDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ConcertTicketsShopConnectionString")));
+                options.UseSqlServer(dbOptions.ConcertTicketsShopConnectionString), ServiceLifetime.Scoped);
 
             services.AddControllers();
+            services.AddCors();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+           .AddJwtBearer(x =>
+           {
+               x.RequireHttpsMetadata = false;
+               x.SaveToken = true;
+               x.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateAudience = false,
+                   ValidateIssuer = true,
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authOptions.EncryptionKey)),
+                   ValidIssuer = authOptions.Issuer
+               };
+           });
 
             //dependecies
             Dependencies.RegisterDependencies(services, Configuration);
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            //add exception handling
+            app.UseExceptionHandler(new ExceptionHandlerOptions
             {
-                app.UseDeveloperExceptionPage();
-            }
+                ExceptionHandler = new ExceptionHandlingMidleware().Invoke
+                
+            });
 
-            app.UseHttpsRedirection();
+            //commit business transactions
+            app.UseUnitOfWork();
 
             app.UseRouting();
+
+            app.UseCors();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

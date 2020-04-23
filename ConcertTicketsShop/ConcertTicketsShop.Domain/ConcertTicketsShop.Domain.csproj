@@ -8,4 +8,10 @@
     <ProjectReference Include="..\ConcertTicketsShop.Dal\ConcertTicketsShop.Dal.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
 </Project>

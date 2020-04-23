@@ -2,13 +2,14 @@
 using ConcertTicketsShop.Domain.Contract;
 using ConcertTicketsShop.Domain.Request;
 using ConcertTicketsShop.Domain.Response;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertTicketsShop.Service.Controllers
 {
     [Route("api/auth")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService _authenticationService;
