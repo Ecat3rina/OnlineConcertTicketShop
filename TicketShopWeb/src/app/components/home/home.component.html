@@ -1,1 +1,38 @@
-<p>home works!</p>
+<mat-drawer-container class="home-container">
+    <mat-drawer mode="side" opened>
+        <div fxLayout="column" class="username-container">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="profile-icon" color='primary' aria-hidden="false">face</mat-icon>
+                <div class="username-box">{{username}}</div>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="small-button" color='primary' aria-hidden="false" matBadge="0" matBadgeColor="warn">
+                    notification_important</mat-icon>
+                <mat-icon class="small-button" color='primary' aria-hidden="false">settings</mat-icon>
+                <mat-icon class="small-button" color='primary' aria-hidden="false">exit_to_app</mat-icon>
+            </div> -->
+        </div>
+        <mat-list>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <mat-icon color='primary' aria-hidden="false">home</mat-icon>
+                Buy Tickets
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon color='warn' aria-hidden="false">favorite</mat-icon>
+                Favorites
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon color='primary' aria-hidden="false">search</mat-icon>
+                Search
+            </mat-list-item>
+
+            <mat-list-item>
+                <mat-icon color='primary' aria-hidden="false">account_box</mat-icon>
+                My Profile
+            </mat-list-item>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>Main content</mat-drawer-content>
+</mat-drawer-container>
