@@ -28,7 +28,7 @@ namespace ConcertTicketsShop.Service.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return Unauthorized();
         }
     }
 }

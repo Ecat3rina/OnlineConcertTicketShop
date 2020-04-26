@@ -16,6 +16,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpRequestInterceptor } from './service/http-request.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { JwtInterceptor } from './service/jwt-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,8 +31,11 @@ import { MatBadgeModule } from '@angular/material/badge';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
@@ -36,9 +45,21 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatListModule,
     MatDividerModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -36,7 +36,16 @@ namespace ConcertTicketsShop.Service
                 options.UseSqlServer(dbOptions.ConcertTicketsShopConnectionString), ServiceLifetime.Scoped);
 
             services.AddControllers();
-            services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowCredentials());
+            });
 
             services.AddAuthentication(x =>
             {
@@ -76,7 +85,7 @@ namespace ConcertTicketsShop.Service
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
