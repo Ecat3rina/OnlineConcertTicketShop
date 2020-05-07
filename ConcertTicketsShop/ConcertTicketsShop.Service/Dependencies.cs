@@ -21,6 +21,8 @@ namespace ConcertTicketsShop.Service
             services.AddScoped<IConcertRepository, ConcertRepository>();
             services.AddScoped<IWhishlistRepository, WhishlistRepository>();
             services.AddScoped<IVenueRepository, VenueRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IUserRolesRepository, UserRoleRepository>();
 
             //services
             services.AddScoped<IAuthService, AuthService>();

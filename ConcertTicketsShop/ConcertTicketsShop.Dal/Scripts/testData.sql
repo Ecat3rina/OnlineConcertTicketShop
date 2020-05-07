@@ -2,6 +2,8 @@
 
 insert into Users(Firstname,Lastname,[Password],Username,DisplayName)
 VALUES('Ion','Raileanu','test123','iraileanu','iraileanu') --1
+insert into Users(Firstname,Lastname,[Password],Username,DisplayName)
+VALUES('Ion','Raileanu','test123','admin','iraileanu-admin') --2
 
 --Venues
 
@@ -111,3 +113,14 @@ Values (2,4);
 
 INSERT INTO ConcertParticipants(ConcertId, ArtistId)
 Values (3,3);
+
+--Roles
+
+INSERT INTO ROLES (name) values ('User'); --1
+
+INSERT INTO ROLES (name) values ('Admin'); --1
+
+--User Roles
+insert into userRoles(userId, roleId) VALUES (1, 1);
+insert into userRoles(userId, roleId) VALUES (2, 1);
+insert into userRoles(userId, roleId) VALUES (2, 2);

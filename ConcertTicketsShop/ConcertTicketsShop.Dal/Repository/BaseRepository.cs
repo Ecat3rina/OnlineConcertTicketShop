@@ -20,7 +20,7 @@ namespace ConcertTicketsShop.Dal.Repository
 
         public void Update(TEntity entity)
         {
-            _context.Entry<TEntity>(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task<IList<TEntity>> GetAll()

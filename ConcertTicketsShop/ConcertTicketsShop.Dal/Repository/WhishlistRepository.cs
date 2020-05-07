@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ConcertTicketsShop.Dal.Contract;
 using ConcertTicketsShop.Dal.Entities;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ConcertTicketsShop.Dal.Repository
 {
@@ -14,7 +16,7 @@ namespace ConcertTicketsShop.Dal.Repository
 
         public async Task<IList<Wishlist>> GetUserWhishlistAsync(int userId)
         {
-            return await Task.FromResult(_context.Wishlists.Where(x => x.UserId == userId).ToList());
+            return await _context.Wishlists.Where(x => x.UserId == userId).ToListAsync();
         }
     }
 }

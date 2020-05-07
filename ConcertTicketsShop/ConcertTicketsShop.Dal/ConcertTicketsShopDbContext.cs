@@ -18,5 +18,7 @@ namespace ConcertTicketsShop.Dal
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<ConcertParticipant> ConcertParticipants { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
     }
 }

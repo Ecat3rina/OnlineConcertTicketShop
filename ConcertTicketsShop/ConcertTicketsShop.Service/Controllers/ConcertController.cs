@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertTicketsShop.Service.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("api/concerts")]
     public class ConcertController : ControllerBase

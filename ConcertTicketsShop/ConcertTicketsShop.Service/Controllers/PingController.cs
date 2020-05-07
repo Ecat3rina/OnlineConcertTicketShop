@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertTicketsShop.Service.Controllers
 {
-
+    [AllowAnonymous]
     [ApiController]
     [Route("api/ping")]
     public class PingController : ControllerBase

@@ -62,7 +62,8 @@ namespace ConcertTicketsShop.Service
                    ValidateIssuer = true,
                    ValidateIssuerSigningKey = true,
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authOptions.EncryptionKey)),
-                   ValidIssuer = authOptions.Issuer
+                   ValidIssuer = authOptions.Issuer,
+                   
                };
            });
 
