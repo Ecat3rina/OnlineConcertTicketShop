@@ -2,10 +2,12 @@
 using ConcertTicketsShop.Domain.Contract;
 using ConcertTicketsShop.Domain.Request;
 using ConcertTicketsShop.Service.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertTicketsShop.Service.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/profile")]
     public class ProfileController : ControllerBase

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ConcertTicketsShop.Dal.Contract
 {
@@ -6,5 +7,6 @@ namespace ConcertTicketsShop.Dal.Contract
     {
         Task<TEntity> GetById(int id);
         void Update(TEntity entity);
+        Task<IList<TEntity>> GetAll();
     }
 }

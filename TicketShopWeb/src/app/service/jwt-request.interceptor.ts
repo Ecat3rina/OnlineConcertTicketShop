@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpEvent, HttpHandler, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpEvent, HttpHandler, HttpResponse, HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     }
 
-    intercept(req: import("@angular/common/http").HttpRequest<any>,
+    intercept(req: HttpRequest<any>,
         next: HttpHandler): import("rxjs").Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {

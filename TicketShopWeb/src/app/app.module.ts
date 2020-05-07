@@ -22,12 +22,14 @@ import { CommonModule } from '@angular/common';
 import { HttpRequestInterceptor } from './service/http-request.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { JwtInterceptor } from './service/jwt-request.interceptor';
+import { SearchEventsComponent } from './components/search-events/search-events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SearchEventsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<div class="search-container">
+    <mat-form-field class="app-search-input">
+        <input  type="text" placeholder="Cauta" matInput >
+      </mat-form-field>
+</div>
+
+<div>
+    <p *ngFor="let concert of trendingConcerts$ | async">{{concert.name}}</p>
+</div>

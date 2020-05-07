@@ -34,5 +34,9 @@ export class AuthService {
     return localStorage.getItem(this.UserTokenKey);
   }
 
+  public logOut(): void {
+    localStorage.clear();
+  }
+
 
 }

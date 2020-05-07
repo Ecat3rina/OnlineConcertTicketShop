@@ -18,10 +18,14 @@ namespace ConcertTicketsShop.Service
             services.Configure<DbConnectionStringsOptions>(configuration.GetSection("ConnectionStrings"));
             //repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IConcertRepository, ConcertRepository>();
+            services.AddScoped<IWhishlistRepository, WhishlistRepository>();
+            services.AddScoped<IVenueRepository, VenueRepository>();
 
             //services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IConcertService, ConcertService>();
             //other
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ConcertTicketsShop.Dal.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,11 @@ namespace ConcertTicketsShop.Dal.Repository
         public void Update(TEntity entity)
         {
             _context.Entry<TEntity>(entity).State = EntityState.Modified;
+        }
+
+        public async Task<IList<TEntity>> GetAll()
+        {
+            return await _context.Set<TEntity>().ToListAsync();
         }
     }
 }

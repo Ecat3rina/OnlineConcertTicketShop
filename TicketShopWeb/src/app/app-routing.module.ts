@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchEventsComponent } from './components/search-events/search-events.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch : 'full',
-    redirectTo : 'login'
+    redirectTo : 'home'
   },
   {
     path: 'login',
@@ -16,7 +17,18 @@ const routes: Routes = [
   },
   {
     path : 'home',
-    component : HomeComponent
+    component : HomeComponent,
+    children : [
+      {
+        path : '',
+        redirectTo : 'events',
+        pathMatch : 'full'
+      },
+      {
+        path : 'events',
+        component : SearchEventsComponent
+      }
+    ]
   }
 ];
 
