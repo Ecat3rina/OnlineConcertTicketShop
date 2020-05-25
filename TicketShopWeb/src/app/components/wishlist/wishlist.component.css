@@ -1,0 +1,11 @@
+.mat-icon-fav {
+        font-size: 50px;
+        width:50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+    }
+    h1{
+        color: #231e39;
+    }

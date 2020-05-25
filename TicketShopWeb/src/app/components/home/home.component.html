@@ -8,26 +8,31 @@
         </div>
         <mat-list>
             <mat-divider></mat-divider>
-            <mat-list-item class="list-button">
-                <mat-icon color='primary' aria-hidden="false">home</mat-icon>
-                Buy Tickets
-            </mat-list-item>
-            <mat-list-item class="list-button">
+            <mat-list-item class="list-button" (click)="onFavoritesClick()">
                 <mat-icon color='warn' aria-hidden="false">favorite</mat-icon>
                 Favorites
             </mat-list-item>
-            <mat-list-item class="list-button">
+            <mat-list-item class="list-button" (click)="onSearchClick()">
                 <mat-icon color='primary' aria-hidden="false">search</mat-icon>
                 Search
             </mat-list-item>
-            <mat-list-item class="list-button">
+            <mat-list-item class="list-button" (click)="onProfileClick()">
                 <mat-icon color='primary' aria-hidden="false">account_box</mat-icon>
                 My Profile
             </mat-list-item>
+
+            <mat-list-item class="list-button" (click)="onAdminClick()" *ngIf="displayAdmin == true">
+                <mat-icon color='primary' aria-hidden="false">verified_user</mat-icon>
+                Admin
+            </mat-list-item>
+
             <mat-list-item class="list-button" (click)="onLogoutClick()">
                 <mat-icon color='primary' aria-hidden="false">exit_to_app</mat-icon>
                 Log Out
             </mat-list-item>
+
+            
+
         </mat-list>
     </mat-drawer>
     <mat-drawer-content>

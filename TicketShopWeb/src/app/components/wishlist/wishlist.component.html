@@ -1,0 +1,13 @@
+<mat-card class="no-border">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <h1 style="font-weight: bold"><mat-icon class="mat-icon-fav"color='primary' aria-hidden="false">favorite</mat-icon>My Wishlist</h1>
+</div>
+</mat-card>
+<div *ngIf="wishlistitems">
+    
+    <event-card *ngFor="let wishlistitem of wishlistitems" 
+    [event]="wishlistitem" 
+    [enableFavorite]="'false'"
+   
+    (concertRemovedFromFavorite) = "onItemRemovedFromFavorites($event)"></event-card>
+</div>

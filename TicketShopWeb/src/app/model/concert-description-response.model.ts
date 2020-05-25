@@ -4,4 +4,5 @@ export class ConcertDescriptionResponseModel {
     venueName: string;
     date: Date;
     duration: string;
+    addedToWishlist : boolean;
 }

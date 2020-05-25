@@ -1,0 +1,9 @@
+.event-container{
+    border-radius: 10px;
+    border-spacing: 25px;
+    border: medium solid #9966ff;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 10px;
+}

@@ -16,5 +16,8 @@ export class ConcertService {
     public getTrendingConcerts() : Observable<ConcertDescriptionResponseModel[]>{
         return this._http.get<ConcertDescriptionResponseModel[]>(environment.apiBaseUrl + 'concerts/trending');
     }
+    public getMyWishlist() : Observable<ConcertDescriptionResponseModel[]>{
+        return this._http.get<ConcertDescriptionResponseModel[]>(environment.apiBaseUrl + 'concerts/wishlist');
+    }
 
 }

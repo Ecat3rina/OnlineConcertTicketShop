@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         let authResponseModel = response as AuthResponseModel;
         this.profileService.setDisplayName(authResponseModel.displayName);
         this.authService.setAuthToken(authResponseModel.token);
+        this.authService.setUserRoles(authResponseModel.roles);
         this.router.navigate(['/home']);
       }, error => {
         this.authModel = new AuthRequestModel();

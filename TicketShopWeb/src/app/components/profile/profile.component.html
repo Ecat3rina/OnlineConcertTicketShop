@@ -1,0 +1,37 @@
+<mat-card>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <h1 style="font-weight: bold">
+            <mat-icon class="mat-icon-profile" color='primary' aria-hidden="false">account_box</mat-icon>My Profile
+        </h1>
+    </div>
+</mat-card>
+<div>
+    <div class="card-container">
+        <mat-icon class="mat-icon-face" color='primary' aria-hidden="false">face</mat-icon>
+        <br><br>
+
+        <ng-container *ngIf="buttonEditClicked==false">
+            <div fxLayout="row" fxLayoutAlign="center">
+            <h1>
+                {{username}}
+            </h1>
+            <button mat-icon-button aria-label="heart icon" (click)="onEditNameClick()">
+                <mat-icon style="display:inline;font-size: 30px;" aria-hidden="false">edit</mat-icon>
+            </button>
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="buttonEditClicked==true">
+            <input matInput type="text" [(ngModel)]="updateProfileRequest.displayName" />
+            <button class="btn btn-primary" (click)="onSubmitClick()">Submit</button>
+        </ng-container>
+
+
+        <hr>
+        <br>
+        <h2>Favourites
+            <mat-icon *ngIf="wishlistitems" [matBadge]="wishlistitems.length">favorite</mat-icon>
+        </h2>
+        <br>
+    </div>
