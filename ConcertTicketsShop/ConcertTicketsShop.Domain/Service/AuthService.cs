@@ -36,24 +36,24 @@ namespace ConcertTicketsShop.Domain.Service
         public async Task<AuthResponseModel> AuthenticateUserAsync(AuthRequestModel request)
         {
             var user = await _userRepository.GetUserByUsernameAsync(request.Username);
-
+            var userRoles = await GetUserRoles(user.Id);
             if(user != null && user.Password == request.Password)
             {
                 return new AuthResponseModel
                 {
                     DisplayName = user.DisplayName,
-                    Token = await GenerateJwtToken(user)
+                    Token = GenerateJwtToken(user, userRoles),
+                    Roles = userRoles
                 };
             }
             return null;
         }
 
-        private async Task<string> GenerateJwtToken(User user)
+        private string GenerateJwtToken(User user, IList<string> userRoles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_authOptions.EncryptionKey);
 
-            var userRoles = await GetUserRoles(user.Id);
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),

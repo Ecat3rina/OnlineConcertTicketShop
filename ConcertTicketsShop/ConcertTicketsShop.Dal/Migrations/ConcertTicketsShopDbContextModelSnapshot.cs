@@ -55,12 +55,13 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.Property<DateTime>("ConcertStart")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("VenueId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("VenueId");
 
                     b.ToTable("Concerts");
                 });
@@ -96,6 +97,21 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Ticket", b =>
@@ -170,6 +186,24 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRoles");
+                });
+
             modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Venue", b =>
                 {
                     b.Property<int>("Id")
@@ -218,15 +252,6 @@ namespace ConcertTicketsShop.Dal.Migrations
                     b.HasOne("ConcertTicketsShop.Dal.Entities.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConcertTicketsShop.Dal.Entities.Concert", b =>
-                {
-                    b.HasOne("ConcertTicketsShop.Dal.Entities.Venue", "Venue")
-                        .WithMany()
-                        .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

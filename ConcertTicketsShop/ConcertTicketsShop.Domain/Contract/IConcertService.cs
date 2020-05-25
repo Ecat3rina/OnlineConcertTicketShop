@@ -6,6 +6,7 @@ namespace ConcertTicketsShop.Domain.Contract
 {
     public interface IConcertService
     {
-        Task<IList<ConcertDescriptionResponseModel>> GetTrendingConcerts();
+        Task<IList<ConcertDescriptionResponseModel>> GetTrendingConcerts(int userId);
+        Task<IList<ConcertDescriptionResponseModel>> GetConcertsFromWhishlistAsync(int userId);
     }
 }

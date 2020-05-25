@@ -8,5 +8,6 @@ namespace ConcertTicketsShop.Domain.Response
         public string VenueName { get; set; }
         public DateTime Date { get; set; }
         public string Duration { get; set; }
+        public bool AddedToWishlist { get; set; }
     }
 }

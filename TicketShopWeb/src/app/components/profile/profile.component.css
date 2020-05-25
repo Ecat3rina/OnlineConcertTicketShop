@@ -38,7 +38,8 @@ p {
     vertical-align: middle;
 }
 input{
-    border:2px solid white;
-    width: 90%;
+    border:2px solid rgb(122, 78, 115);
+    width: 70%;
     border-radius: 4px;
+    
 }

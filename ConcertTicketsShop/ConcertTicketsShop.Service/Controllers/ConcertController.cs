@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ConcertTicketsShop.Domain.Contract;
+using ConcertTicketsShop.Service.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,13 @@ namespace ConcertTicketsShop.Service.Controllers
         [HttpGet("trending")]
         public async Task<IActionResult> GetTrendingConcerts()
         {
-            return Ok(await _concertService.GetTrendingConcerts());
+            return Ok(await _concertService.GetTrendingConcerts(User.GetId()));
+        }
+
+        [HttpGet("wishlist")]
+        public async Task<IActionResult> GetMyWishlist()
+        {
+            return Ok(await _concertService.GetConcertsFromWhishlistAsync(User.GetId()));
         }
     }
 }

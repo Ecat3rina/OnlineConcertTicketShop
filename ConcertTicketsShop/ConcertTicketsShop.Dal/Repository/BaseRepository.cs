@@ -27,5 +27,16 @@ namespace ConcertTicketsShop.Dal.Repository
         {
             return await _context.Set<TEntity>().ToListAsync();
         }
+
+        public async Task Create(TEntity entity)
+        {
+            await _context.Set<TEntity>().AddAsync(entity);
+        }
+        public void Delete(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+            
+        }
+
     }
 }

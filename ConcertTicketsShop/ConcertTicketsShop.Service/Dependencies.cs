@@ -19,15 +19,17 @@ namespace ConcertTicketsShop.Service
             //repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IConcertRepository, ConcertRepository>();
-            services.AddScoped<IWhishlistRepository, WhishlistRepository>();
+            services.AddScoped<IWishlistRepository, WishlistRepository>();
             services.AddScoped<IVenueRepository, VenueRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRolesRepository, UserRoleRepository>();
+           
 
             //services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IConcertService, ConcertService>();
+            services.AddScoped<IWishlistService, WishlistService>();
             //other
         }
     }

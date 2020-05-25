@@ -8,5 +8,7 @@ namespace ConcertTicketsShop.Dal.Contract
         Task<TEntity> GetById(int id);
         void Update(TEntity entity);
         Task<IList<TEntity>> GetAll();
+        Task Create(TEntity entity);
+        void Delete(TEntity entity);
     }
 }

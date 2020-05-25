@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConcertTicketsShop.Dal.Migrations
 {
-    public partial class BaseMigrationCorrected : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,23 @@ namespace ConcertTicketsShop.Dal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Concerts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    ConcertDate = table.Column<DateTime>(nullable: false),
+                    ConcertStart = table.Column<DateTime>(nullable: false),
+                    ConcertFinish = table.Column<DateTime>(nullable: false),
+                    VenueId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Concerts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
                 {
@@ -35,6 +52,19 @@ namespace ConcertTicketsShop.Dal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TicketTypes",
                 columns: table => new
                 {
@@ -45,6 +75,20 @@ namespace ConcertTicketsShop.Dal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TicketTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,28 +139,6 @@ namespace ConcertTicketsShop.Dal.Migrations
                         name: "FK_Artists_Genres_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genres",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Concerts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ConcertDate = table.Column<DateTime>(nullable: false),
-                    ConcertStart = table.Column<DateTime>(nullable: false),
-                    ConcertFinish = table.Column<DateTime>(nullable: false),
-                    VenueId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Concerts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Concerts_Venues_VenueId",
-                        column: x => x.VenueId,
-                        principalTable: "Venues",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -187,11 +209,6 @@ namespace ConcertTicketsShop.Dal.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Concerts_VenueId",
-                table: "Concerts",
-                column: "VenueId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ConcertId",
                 table: "Tickets",
                 column: "ConcertId");
@@ -226,7 +243,16 @@ namespace ConcertTicketsShop.Dal.Migrations
                 name: "ConcertParticipants");
 
             migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
                 name: "Tickets");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "Venues");
 
             migrationBuilder.DropTable(
                 name: "Wishlists");
@@ -242,9 +268,6 @@ namespace ConcertTicketsShop.Dal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Venues");
         }
     }
 }
